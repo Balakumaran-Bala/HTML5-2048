@@ -12,18 +12,19 @@ var render = function() {
     var oneThousandTwentyEight = new Image(128, 128);
     var twoThousandFourtyEight = new Image(128, 128);
 
-    two.src = "./img/2.png";
-    four.src = "../HTML5-2048/img/4.png";
-    eight.src = "../HTML5-2048/img/8.png";
-    sixteen.src = "../HTML5-2048/img/16.png";
-    thrityTwo.src = "../HTML5-2048/img/32.png";
-    sixtyFour.src = "../HTML5-2048/img/64.png";
-    oneTwentyEight.src = "../HTML5-2048/img/128.png"
-    twoFiftySix.src = "../HTML5-2048/img/256.png"
-    fiveTwelve.src = "../HTML5-2048/img/512.png"
-    oneThousandTwentyEight.src = "../HTML5-2048/img/1024.png"
-    twoThousandFourtyEight.src = "../HTML5-2048/img/2048.png"
-    background.src = "./img/background.png";
+    // Note: these paths are relative to index.html's location
+    two.src = "img/2.png";
+    four.src = "img/4.png";
+    eight.src = "img/8.png";
+    sixteen.src = "img/16.png";
+    thrityTwo.src = "img/32.png";
+    sixtyFour.src = "img/64.png";
+    oneTwentyEight.src = "img/128.png"
+    twoFiftySix.src = "img/256.png"
+    fiveTwelve.src = "img/512.png"
+    oneThousandTwentyEight.src = "img/1024.png"
+    twoThousandFourtyEight.src = "img/2048.png"
+    background.src = "img/background.png";
 
     var images = {};
     // images['0'] = blank;
