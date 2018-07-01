@@ -12,7 +12,7 @@ var render = function() {
     var oneThousandTwentyEight = new Image(128, 128);
     var twoThousandFourtyEight = new Image(128, 128);
 
-    two.src = "../HTML5-2048/img/2.png";
+    two.src = "./img/2.png";
     four.src = "../HTML5-2048/img/4.png";
     eight.src = "../HTML5-2048/img/8.png";
     sixteen.src = "../HTML5-2048/img/16.png";
@@ -23,7 +23,7 @@ var render = function() {
     fiveTwelve.src = "../HTML5-2048/img/512.png"
     oneThousandTwentyEight.src = "../HTML5-2048/img/1024.png"
     twoThousandFourtyEight.src = "../HTML5-2048/img/2048.png"
-    background.src = "../HTML5-2048/img/background.png";
+    background.src = "./img/background.png";
 
     var images = {};
     // images['0'] = blank;
