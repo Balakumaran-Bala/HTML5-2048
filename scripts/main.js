@@ -10,4 +10,7 @@ var grid = [
 
 render();
 keyboardInit();
-while (true) {};
+
+var main = function() {
+    requestAnimationFrame(main);
+}
