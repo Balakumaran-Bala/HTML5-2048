@@ -1,10 +1,3 @@
-var grid = [
-    [8, 4, 8, 4],
-    [2, 0, 0, 0],
-    [2, 0, 0, 0],
-    [4, 2, 0, 0]
-];
-
 var update = function(key) {
     var bool = [
         [0, 0, 0, 0],
@@ -12,13 +5,19 @@ var update = function(key) {
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ];
-    for (var i = 0; i < grid.length; i++) {
-        var combined = "";
-        for (var j = 0; j < grid.length; j++) {
-            combined += grid[i][j] + " ";
+
+    var oldGrid = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ];
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            oldGrid[i][j] = grid[i][j];
         }
-        console.log(combined);
     }
+
     if (key === 37) {
         for (var i = 0; i < grid.length; i++) {
             for (var j = 0; j < grid.length; j++) {
@@ -118,28 +117,29 @@ var update = function(key) {
             }
         }
     }
-    console.log();
-    var randI = Math.floor(Math.random()*4);
-    var randJ = Math.floor(Math.random()*4);
-    while (grid[randI][randJ] != 0) {
-        randI = Math.floor(Math.random()*4);
-        randJ = Math.floor(Math.random()*4);
+
+    var change = 0;
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            if (oldGrid[i][j] != grid[i][j]) {
+                change++;
+            }
+        }
     }
 
-    var randNum = Math.floor(Math.random()*4);
-    if (randNum <= 2) {
-        grid[randI][randJ] = 2;
-    } else {
-        grid[randI][randJ] = 4;
-    }
-    
-    for (var i = 0; i < grid.length; i++) {
-        var combined = "";
-        for (var j = 0; j < grid.length; j++) {
-            combined += grid[i][j] + " ";
+    if (change != 0) {
+        var randI = Math.floor(Math.random()*4);
+        var randJ = Math.floor(Math.random()*4);
+        while (grid[randI][randJ] != 0) {
+            randI = Math.floor(Math.random()*4);
+            randJ = Math.floor(Math.random()*4);
         }
-        console.log(combined);
+
+        var randNum = Math.floor(Math.random()*4);
+        if (randNum <= 2) {
+            grid[randI][randJ] = 2;
+        } else {
+            grid[randI][randJ] = 4;
+        }
     }
 }
-
-update(40);
