@@ -15,4 +15,9 @@ var keyboardInit = function() {
             keyDown = false;
         }
     })
+
+}
+
+var btn = function() {
+    window.location.reload();
 }
