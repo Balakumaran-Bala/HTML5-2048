@@ -1,5 +1,5 @@
 var render = function() {
-    var blank = new Image(128, 128);
+    var background = new Image(512, 512);
     var two = new Image(128, 128);
     var four = new Image(128, 128);
     var eight = new Image(128, 128);
@@ -12,7 +12,6 @@ var render = function() {
     var oneThousandTwentyEight = new Image(128, 128);
     var twoThousandFourtyEight = new Image(128, 128);
 
-    blank.src = "./../img/blank.PNG";
     two.src = "./../img/2.png";
     four.src = "./../img/4.png";
     eight.src = "./../img/8.png";
@@ -24,9 +23,10 @@ var render = function() {
     fiveTwelve.src = "./../img/512.png"
     oneThousandTwentyEight.src = "./../img/1024.png"
     twoThousandFourtyEight.src = "./../img/2048.png"
+    background.src = "./../img/background.png";
 
     var images = {};
-    images['0'] = blank;
+    // images['0'] = blank;
     images['2'] = two;
     images['4'] = four;
     images['8'] = eight;
@@ -39,13 +39,17 @@ var render = function() {
     images['1024'] = oneThousandTwentyEight;
     images['2048'] = twoThousandFourtyEight;
 
-    twoFiftySix.onload = function () {
+    background.onload = function () {
+        ctx.drawImage(background, 0, 0);
+
         var x = 0;
         var y = 0;
         for (var i = 0; i < 4; i++) {
             x = 0;
             for (var j = 0; j <4; j++) {
-                ctx.drawImage(images[grid[i][j].toString()], x, y);
+                if (grid[i][j] != 0) {
+                    ctx.drawImage(images[grid[i][j].toString()], x, y);
+                }
                 x += 128;
             }
             y += 128;
