@@ -1,3 +1,16 @@
-.title {
+html {
+    font-family: 'Source Sans Pro', sans-serf;
+}
+
+.title,
+.subtitle {
     text-align: center;
+}
+
+.title {
+    margin-bottom: 0px;
+}
+
+.subtitle {
+    margin-top: 0px;
 }
