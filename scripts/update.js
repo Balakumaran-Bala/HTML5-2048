@@ -15,9 +15,9 @@ var update = function(key) {
                         }
 
                         grid[i][j] = 0;
-                    }   
+                    }
                 }
-            } 
+            }
         }
 
     } else if (key === 39) {
@@ -36,7 +36,7 @@ var update = function(key) {
                         }
 
                         grid[i][j] = 0;
-                    }   
+                    }
                 }
             }
         }
@@ -57,7 +57,7 @@ var update = function(key) {
                         }
 
                         grid[j][i] = 0;
-                    }   
+                    }
                 }
             }
         }
@@ -78,18 +78,18 @@ var update = function(key) {
                         }
 
                         grid[j][i] = 0;
-                    }   
+                    }
                 }
             }
         }
 
-        int randI = Math.random()*4;
-        int randJ = Math.random()*4;
+        var randI = Math.random()*4;
+        var randJ = Math.random()*4;
         while (grid[randI][randJ] != 0) {
             randI = Math.random()*4;
             randJ = Math.random()*4;
         }
-        int randNum = Math.random()*3;
+        var randNum = Math.random()*3;
         if (randNum <= 2) {
             grid[randI][randJ] = 2;
         } else {
