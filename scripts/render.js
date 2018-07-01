@@ -8,6 +8,10 @@ var render = function() {
     var sixtyFour = new Image(128, 128);
     var oneTwentyEight = new Image(128, 128);
     var twoFiftySix = new Image(128, 128);
+    var fiveTwelve = new Image(128, 128);
+    var oneThousandTwentyEight = new Image(128, 128);
+    var twoThousandFourtyEight = new Image(128, 128);
+
     blank.src = "./../img/blank.PNG";
     two.src = "./../img/two.PNG";
     four.src = "./../img/four.PNG";
@@ -16,7 +20,10 @@ var render = function() {
     thrityTwo.src = "./../img/thritytwo.PNG";
     sixtyFour.src = "./../img/sixtyfour.PNG";
     oneTwentyEight.src = "./../img/onetwentyeight.PNG"
-    twoFiftySix.src = "./../img/fivetwelve.PNG"
+    twoFiftySix.src = "./../img/twofiftysix.PNG"
+    fiveTwelve.src = "./../img/fivetwelve.PNG"
+    oneThousandTwentyEight.src = "./../img/tentwentyfour.PNG"
+    twoThousandFourtyEight.src = "./../img/twentyfourtyeight.PNG"
 
     var images = {};
     images['0'] = blank;
@@ -28,6 +35,9 @@ var render = function() {
     images['64'] = sixtyFour;
     images['128'] = oneTwentyEight;
     images['256'] = twoFiftySix;
+    images['512'] = fiveTwelve;
+    images['1024'] = oneThousandTwentyEight;
+    images['2048'] = twoThousandFourtyEight;
 
     twoFiftySix.onload = function () {
         var x = 0;
