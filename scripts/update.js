@@ -1,3 +1,10 @@
+var grid = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 2],
+    [0, 0, 0, 2]
+];
+
 var update = function(key) {
     if (key === 37) {
         for (var i = 0; i < grid.length; i++) {
@@ -42,6 +49,13 @@ var update = function(key) {
         }
 
     } else if (key === 38) {
+        // for (var i = 0; i < grid.length; i++) {
+        //     var combined = "";
+        //     for (var j = 0; j < grid.length; j++) {
+        //         combined += grid[i][j] + " ";
+        //     }
+        //     console.log(combined);
+        // }
         for (var i = 0; i < grid.length; i++) {
             var lastFilled = 0;
             for (var j = 0; j < grid.length; j++) {
@@ -61,7 +75,6 @@ var update = function(key) {
                 }
             }
         }
-
     } else if (key === 40) {
         for (var i = grid.length-1; i >= 0; i--) {
             var lastFilled = grid.length-1;
@@ -82,18 +95,18 @@ var update = function(key) {
                 }
             }
         }
+    }
+    var randI = Math.floor(Math.random()*4);
+    var randJ = Math.floor(Math.random()*4);
+    while (grid[randI][randJ] != 0) {
+        randI = Math.floor(Math.random()*4);
+        randJ = Math.floor(Math.random()*4);
+    }
 
-        var randI = Math.random()*4;
-        var randJ = Math.random()*4;
-        while (grid[randI][randJ] != 0) {
-            randI = Math.random()*4;
-            randJ = Math.random()*4;
-        }
-        var randNum = Math.random()*3;
-        if (randNum <= 2) {
-            grid[randI][randJ] = 2;
-        } else {
-            grid[randI][randJ] = 4;
-        }
+    var randNum = Math.floor(Math.random()*4);
+    if (randNum <= 2) {
+        grid[randI][randJ] = 2;
+    } else {
+        grid[randI][randJ] = 4;
     }
 }
