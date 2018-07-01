@@ -1,9 +1,5 @@
 html {
     font-family: 'Source Sans Pro', sans-serf;
-}
-
-.title,
-.subtitle {
     text-align: center;
 }
 
@@ -13,8 +9,4 @@ html {
 
 .subtitle {
     margin-top: 0px;
-}
-
-div {
-    text-align: center;
 }
