@@ -16,9 +16,11 @@ randI = Math.floor(Math.random()*4);
 randJ = Math.floor(Math.random()*4);
 grid[randI][randJ] = 2;
 
-render();
-keyboardInit();
+background.onload = function() {
+    render(); // why can't this be assigned to onload alone?
+    keyboardInit(); // start the game
+};
 
-var main = function() {
+/* var main = function() {
     requestAnimationFrame(main);
-}
+} */
