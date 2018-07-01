@@ -12,10 +12,10 @@ var render = function() {
     var oneThousandTwentyEight = new Image(128, 128);
     var twoThousandFourtyEight = new Image(128, 128);
 
-    two.src = "/img/2.png";
-    four.src = "/img/4.png";
-    eight.src = "HTML5-2048/img/8.png";
-    sixteen.src = "./HTML5-2048/img/16.png";
+    two.src = "../HTML5-2048/img/2.png";
+    four.src = "../HTML5-2048/img/4.png";
+    eight.src = "../HTML5-2048/img/8.png";
+    sixteen.src = "../HTML5-2048/img/16.png";
     thrityTwo.src = "../HTML5-2048/img/32.png";
     sixtyFour.src = "./../img/64.png";
     oneTwentyEight.src = "./../img/128.png"
