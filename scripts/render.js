@@ -39,6 +39,9 @@ images['512'] = fiveTwelve;
 images['1024'] = oneThousandTwentyEight;
 images['2048'] = twoThousandFourtyEight;
 
+// Everything drawn is scaled by .6 to fit inside the
+// 306 by 665 canvas.
+
 var render = function() {
     ctx.drawImage(background, 0, 0);
     //textWidth = ctx.measureText("5624").width;
