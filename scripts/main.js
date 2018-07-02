@@ -5,6 +5,8 @@ ctx.fillStyle = "#f6f0ff"
 ctx.font = "bold 150px Source Sans Pro";
 ctx.textAlign = "center";
 
+var score = 0;
+
 var grid = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],

@@ -32,6 +32,7 @@ var update = function(key) {
                         grid[i][j] = temp;
                     } else if (grid[i][pos] === grid[i][j] && bool[i][pos] != 1) {
                         grid[i][pos] *= 2;
+                        score += grid[i][pos];
                         bool[i][pos] = 1;
                         grid[i][j] = 0;
                     } else {
@@ -57,6 +58,7 @@ var update = function(key) {
                         grid[i][j] = temp;
                     } else if (grid[i][pos] === grid[i][j] && bool[i][pos] != 1) {
                         grid[i][pos] *= 2;
+                        score += grid[i][pos];
                         bool[i][pos] = 1;
                         grid[i][j] = 0;
                     } else {
@@ -82,6 +84,7 @@ var update = function(key) {
                         grid[j][i] = temp;
                     } else if (grid[pos][i] === grid[j][i] && bool[pos][i] != 1) {
                         grid[pos][i] *= 2;
+                        score += grid[pos][i];
                         bool[pos][i] = 1;
                         grid[j][i] = 0;
                     } else {
@@ -106,6 +109,7 @@ var update = function(key) {
                         grid[j][i] = temp;
                     } else if (grid[pos][i] === grid[j][i] && bool[pos][i] != 1) {
                         grid[pos][i] *= 2;
+                        score += grid[pos][i];
                         bool[pos][i] = 1;
                         grid[j][i] = 0;
                     } else {

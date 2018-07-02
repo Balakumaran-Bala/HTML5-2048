@@ -51,7 +51,7 @@ var render = function() {
     //textWidth = ctx.measureText("5624").width;
     //console.log(textWidth);
     //153 - (textWidth / 2)
-    ctx.fillText("5624", 256, 215);
+    ctx.fillText(score.toString(), 256, 215);
 
     var x = 0;
     var y = 290;
