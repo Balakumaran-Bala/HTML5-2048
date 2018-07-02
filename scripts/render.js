@@ -1,4 +1,6 @@
 var background = new Image(512, 512);
+var border = new Image(128, 128);
+
 var two = new Image(128, 128);
 var four = new Image(128, 128);
 var eight = new Image(128, 128);
@@ -12,6 +14,9 @@ var oneThousandTwentyEight = new Image(128, 128);
 var twoThousandFourtyEight = new Image(128, 128);
 
 // Note: these paths are relative to index.html's location
+background.src = "img/background.png";
+border.src = "img/border.png";
+
 two.src = "img/2.png";
 four.src = "img/4.png";
 eight.src = "img/8.png";
@@ -23,7 +28,6 @@ twoFiftySix.src = "img/256.png"
 fiveTwelve.src = "img/512.png"
 oneThousandTwentyEight.src = "img/1024.png"
 twoThousandFourtyEight.src = "img/2048.png"
-background.src = "img/background.png";
 
 var images = {};
 // images['0'] = blank;
@@ -57,6 +61,7 @@ var render = function() {
             if (grid[i][j] != 0) {
                 ctx.drawImage(images[grid[i][j].toString()], x, y);
             }
+            ctx.drawImage(border, x, y);
             x += 128;
         }
         y += 128;
