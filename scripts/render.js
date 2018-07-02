@@ -41,9 +41,13 @@ images['2048'] = twoThousandFourtyEight;
 
 var render = function() {
     ctx.drawImage(background, 0, 0);
+    //textWidth = ctx.measureText("5624").width;
+    //console.log(textWidth);
+    //153 - (textWidth / 2)
+    ctx.fillText("5624", 256, 215);
 
     var x = 0;
-    var y = 0;
+    var y = 290;
     for (var i = 0; i < 4; i++) {
         x = 0;
         for (var j = 0; j <4; j++) {

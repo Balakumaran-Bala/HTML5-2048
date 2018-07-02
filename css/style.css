@@ -14,6 +14,7 @@ html {
 .game-container {
     position: relative;
     box-sizing: border-box;
+    height: 760px;
 }
 
 #iphone {
@@ -31,12 +32,14 @@ html {
     z-index: 0;
     left: 0px;
     right: 0px;
+    top: 49px;
 }
 
 
 @media only screen and (max-width: 425px) {
     /* For mobile phones: */
+    /*
     #iphone {
         width: 100%;
-    }
+    }*/
 }
