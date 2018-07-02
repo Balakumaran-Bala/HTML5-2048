@@ -10,3 +10,33 @@ html {
 .subtitle {
     margin-top: 0px;
 }
+
+.game-container {
+    position: relative;
+    box-sizing: border-box;
+}
+
+#iphone {
+    margin: auto;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    z-index: 1;
+    max-height: 760px;
+}
+
+#game {
+    margin: auto;
+    position: absolute;
+    z-index: 0;
+    left: 0px;
+    right: 0px;
+}
+
+
+@media only screen and (max-width: 425px) {
+    /* For mobile phones: */
+    #iphone {
+        width: 100%;
+    }
+}
