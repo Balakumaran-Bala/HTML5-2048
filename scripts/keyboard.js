@@ -17,7 +17,3 @@ var keyboardInit = function() {
     })
 
 }
-
-var btn = function() {
-    window.location.reload();
-}
