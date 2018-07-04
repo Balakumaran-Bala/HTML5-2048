@@ -122,6 +122,32 @@ var update = function(key) {
         }
     }
 
+    var change_possible = false;
+    for (var i = 0; i < grid.length; i++) {
+        for (var j = 0; j < grid[0].length; j++) {
+            if (0 < i && i < grid.length - 1) {
+                if (grid[i-1][j] === grid[i][j] ||
+                    grid[i+1][j] === grid[i][j] ||
+                    grid[i-1][j] === 0 ||
+                    grid[i+1][j] === 0) {
+                        change_possible = true;
+                    }
+            }
+            if (0 < j && j < grid[0].length - 1) {
+                if (grid[i][j-1] === grid[i][j] ||
+                    grid[i][j+1] === grid[i][j] ||
+                    grid[i][j-1] === 0 ||
+                    grid[i][j+1] === 0) {
+                        change_possible = true;
+                    }
+            }
+        }
+    }
+    if (!change_possible) {
+        game_over = true;
+        return;
+    }
+
     var change = 0;
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
