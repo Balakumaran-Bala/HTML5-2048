@@ -14,10 +14,6 @@ var keyboardInit = function() {
         if ([37, 38, 39, 40].includes(e.keyCode)) {
             keyDown = false;
         }
-    })
+    }, false)
 
-}
-
-var btn = function() {
-    window.location.reload();
 }

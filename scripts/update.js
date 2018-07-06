@@ -32,6 +32,7 @@ var update = function(key) {
                         grid[i][j] = temp;
                     } else if (grid[i][pos] === grid[i][j] && bool[i][pos] != 1) {
                         grid[i][pos] *= 2;
+                        score += grid[i][pos];
                         bool[i][pos] = 1;
                         grid[i][j] = 0;
                     } else {
@@ -57,6 +58,7 @@ var update = function(key) {
                         grid[i][j] = temp;
                     } else if (grid[i][pos] === grid[i][j] && bool[i][pos] != 1) {
                         grid[i][pos] *= 2;
+                        score += grid[i][pos];
                         bool[i][pos] = 1;
                         grid[i][j] = 0;
                     } else {
@@ -82,6 +84,7 @@ var update = function(key) {
                         grid[j][i] = temp;
                     } else if (grid[pos][i] === grid[j][i] && bool[pos][i] != 1) {
                         grid[pos][i] *= 2;
+                        score += grid[pos][i];
                         bool[pos][i] = 1;
                         grid[j][i] = 0;
                     } else {
@@ -106,6 +109,7 @@ var update = function(key) {
                         grid[j][i] = temp;
                     } else if (grid[pos][i] === grid[j][i] && bool[pos][i] != 1) {
                         grid[pos][i] *= 2;
+                        score += grid[pos][i];
                         bool[pos][i] = 1;
                         grid[j][i] = 0;
                     } else {
@@ -116,6 +120,32 @@ var update = function(key) {
                 }
             }
         }
+    }
+
+    var change_possible = false;
+    for (var i = 0; i < grid.length; i++) {
+        for (var j = 0; j < grid[0].length; j++) {
+            if (0 < i && i < grid.length - 1) {
+                if (grid[i-1][j] === grid[i][j] ||
+                    grid[i+1][j] === grid[i][j] ||
+                    grid[i-1][j] === 0 ||
+                    grid[i+1][j] === 0) {
+                        change_possible = true;
+                    }
+            }
+            if (0 < j && j < grid[0].length - 1) {
+                if (grid[i][j-1] === grid[i][j] ||
+                    grid[i][j+1] === grid[i][j] ||
+                    grid[i][j-1] === 0 ||
+                    grid[i][j+1] === 0) {
+                        change_possible = true;
+                    }
+            }
+        }
+    }
+    if (!change_possible) {
+        game_over = true;
+        return;
     }
 
     var change = 0;
