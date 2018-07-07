@@ -5,7 +5,7 @@ var keyboardInit = function() {
          // only call update once
         if (!keyDown && [37, 38, 39, 40].includes(e.keyCode)) {
             keyDown = true;
-            update(e.keyCode);
+            update(e.keyCode - 37);
             render();
         }
     }, false);
