@@ -22,13 +22,6 @@ var update = function(key) {
         [0, 0, 0, 0]
     ];
 
-    a_grid = [
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]
-    ]; // animation grid
-
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             oldGrid[i][j] = grid[i][j];
@@ -51,7 +44,6 @@ var update = function(key) {
                         grid[i][pos] === grid[i][j] &&
                         bool[i][pos] !== 1) {
 
-                        a_grid[i][pos] = grid[i][pos];
                         grid[i][pos] *= 2;
                         score += grid[i][pos];
                         bool[i][pos] = 1;
@@ -62,6 +54,14 @@ var update = function(key) {
                             "end": {"row": i, "col": pos},
                             "startTime": timeNow,
                             "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
+
+                        animated_block = {
+                            "start": {"row": i, "col": pos},
+                            "end": {"row": i, "col": pos},
+                            "startTime": null,
+                            "action": "promote"
                         };
                         animating_blocks.push(animated_block);
                     } else {
@@ -95,7 +95,6 @@ var update = function(key) {
                         grid[i][pos] === grid[i][j] &&
                         bool[i][pos] !== 1) {
 
-                        a_grid[i][pos] = grid[i][pos];
                         grid[i][pos] *= 2;
                         score += grid[i][pos];
                         bool[i][pos] = 1;
@@ -106,6 +105,14 @@ var update = function(key) {
                             "end": {"row": i, "col": pos},
                             "startTime": timeNow,
                             "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
+
+                        animated_block = {
+                            "start": {"row": i, "col": pos},
+                            "end": {"row": i, "col": pos},
+                            "startTime": null,
+                            "action": "promote"
                         };
                         animating_blocks.push(animated_block);
                     } else {
@@ -139,7 +146,6 @@ var update = function(key) {
                         grid[pos][i] === grid[j][i] &&
                         bool[pos][i] !== 1) {
 
-                        a_grid[pos][i] = grid[pos][i];
                         grid[pos][i] *= 2;
                         score += grid[pos][i];
                         bool[pos][i] = 1;
@@ -150,6 +156,14 @@ var update = function(key) {
                             "end": {"row": pos, "col": i},
                             "startTime": timeNow,
                             "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
+
+                        animated_block = {
+                            "start": {"row": pos, "col": i},
+                            "end": {"row": pos, "col": i},
+                            "startTime": null,
+                            "action": "promote"
                         };
                         animating_blocks.push(animated_block);
                     } else {
@@ -182,7 +196,6 @@ var update = function(key) {
                         grid[pos][i] === grid[j][i] &&
                         bool[pos][i] !== 1) {
 
-                        a_grid[pos][i] = grid[pos][i];
                         grid[pos][i] *= 2;
                         score += grid[pos][i];
                         bool[pos][i] = 1;
@@ -193,6 +206,14 @@ var update = function(key) {
                             "end": {"row": pos, "col": i},
                             "startTime": timeNow,
                             "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
+
+                        animated_block = {
+                            "start": {"row": pos, "col": i},
+                            "end": {"row": pos, "col": i},
+                            "startTime": null,
+                            "action": "promote"
                         };
                         animating_blocks.push(animated_block);
                     } else {
@@ -271,13 +292,5 @@ var update = function(key) {
             "action": "spawn"
         };
         animating_blocks.push(animated_block);
-    }
-
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (a_grid[i][j] === 0) {
-                a_grid[i][j] = grid[i][j];
-            }
-        }
     }
 }

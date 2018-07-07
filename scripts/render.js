@@ -1,10 +1,3 @@
-var a_grid = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0]
-]; // animation grid
-
 const background = new Image(512, 512);
 const border = new Image(128, 128);
 
@@ -94,14 +87,76 @@ var render = function(timeNow) {
     let y = 290;
     for (let i = 0; i < 4; i++) {
         x = 0;
-        for (let j = 0; j <4; j++) {
-            if (a_grid[i][j] != 0) {
-                ctx.drawImage(images[a_grid[i][j].toString()], x, y);
+        for (let j = 0; j < 4; j++) {
+            let action = null;
+            let animating_block;
+            for (let k = 0; k < animating_blocks.length; k++) {
+                if (
+                    animating_blocks[k].end.row === i &&
+                    animating_blocks[k].end.col === j 
+                ) {
+                    action = animating_blocks[k].action;
+                    animating_block = animating_blocks[k];
+                    break;
+                }
+            }
+
+            if (action === "slide") { // This block is sliding, don't show it at its destination yet
+            /*
+                let d_row = i - animating_block.start.row;
+                let d_col = j - animating_block.start.col;
+                if (timeNow - animating_block.startTime > 48) {
+                    ctx.drawImage(images[grid[i][j]], 128*i, 128*j + 290);
+                } else { 
+                    // (distance) * (elapsedTime / animationTime)
+                    let x = (128 * d_col) * ((timeNow - animating_block.startTime) / 48);
+                    let y = (128 * d_row) * ((timeNow - animating_block.startTime) / 48);
+                    ctx.drawImage(images[grid[i][j]], x, y + 290); // bugged, could be using doubled value
+                }*/
+            } else if (action === "promote") {
+
+            } else if (action === "spawn") {
+                ctx.drawImage(images[grid[i][j].toString()], x, y);
+            } else if (grid[i][j] != 0) {
+                ctx.drawImage(images[grid[i][j].toString()], x, y);
             }
             ctx.drawImage(border, x, y);
             x += 128;
         }
         y += 128;
+    }
+
+    for (let i = 0; i < animating_blocks.length; i++) {
+        if (animating_blocks[i].action === "slide") {
+            endRow = animating_blocks[i].end.row;
+            endCol = animating_blocks[i].end.col;
+            startRow = animating_blocks[i].start.row
+            startCol = animating_blocks[i].start.col
+            let d_row = endRow - startRow;
+            let d_col = endCol - startCol;
+            let startTime = animating_blocks[i].startTime;
+
+            // distance travelled = elapsedTime * animationSpeed
+            // animationSpeed = distance / animationTime = (128 * 3) / animationTime
+            // timeToDestination = distance / animationSpeed
+
+            timeToDestination = (d_row ? d_row : d_col) * 1000 / 3
+
+            if (timeNow - startTime > timeToDestination) {
+                
+            }
+
+            if (timeNow - startTime > 1000) {
+                ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
+                animating_blocks[i].action = "none";
+            } else {
+                // (distance) * (elapsedTime / animationTime) + (128 * startLocation)
+
+                let x = (128 * d_col) * ((timeNow - startTime) / 1000) + (128 * startCol);
+                let y = (128 * d_row) * ((timeNow - startTime) / 1000) + (128 * startRow);
+                ctx.drawImage(images[grid[endRow][endCol]], x, y + 290); // bugged, could be using doubled value
+            }
+        }
     }
 
     if (game_over) {
