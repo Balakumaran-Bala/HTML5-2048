@@ -26,11 +26,10 @@ var update = function(key) {
                     while (pos >= 0 && grid[i][pos] === 0) {
                         pos--;
                     }
-                    if (pos === -1) {
-                        let temp = grid[i][pos+1];
-                        grid[i][pos+1] = grid[i][j];
-                        grid[i][j] = temp;
-                    } else if (grid[i][pos] === grid[i][j] && bool[i][pos] != 1) {
+                    if (pos !== -1 &&
+                        grid[i][pos] === grid[i][j] &&
+                        bool[i][pos] !== 1) {
+
                         grid[i][pos] *= 2;
                         score += grid[i][pos];
                         bool[i][pos] = 1;
@@ -52,11 +51,10 @@ var update = function(key) {
                     while (pos <= 3 && grid[i][pos] === 0) {
                         pos++;
                     }
-                    if (pos === 4) {
-                        let temp = grid[i][pos-1];
-                        grid[i][pos-1] = grid[i][j];
-                        grid[i][j] = temp;
-                    } else if (grid[i][pos] === grid[i][j] && bool[i][pos] != 1) {
+                    if (pos !== 4 &&
+                        grid[i][pos] === grid[i][j] &&
+                        bool[i][pos] !== 1) {
+
                         grid[i][pos] *= 2;
                         score += grid[i][pos];
                         bool[i][pos] = 1;
@@ -78,11 +76,10 @@ var update = function(key) {
                     while (pos >= 0 && grid[pos][i] === 0) {
                         pos--;
                     }
-                    if (pos === -1) {
-                        let temp = grid[pos+1][i];
-                        grid[pos+1][i] = grid[j][i];
-                        grid[j][i] = temp;
-                    } else if (grid[pos][i] === grid[j][i] && bool[pos][i] != 1) {
+                    if (pos !== -1 &&
+                        grid[pos][i] === grid[j][i] &&
+                        bool[pos][i] !== 1) {
+
                         grid[pos][i] *= 2;
                         score += grid[pos][i];
                         bool[pos][i] = 1;
@@ -103,11 +100,10 @@ var update = function(key) {
                     while (pos <= 3 && grid[pos][i] === 0) {
                         pos++;
                     }
-                    if (pos === 4) {
-                        let temp = grid[pos-1][i];
-                        grid[pos-1][i] = grid[j][i];
-                        grid[j][i] = temp;
-                    } else if (grid[pos][i] === grid[j][i] && bool[pos][i] != 1) {
+                    if (pos !== 4 &&
+                        grid[pos][i] === grid[j][i] &&
+                        bool[pos][i] !== 1) {
+
                         grid[pos][i] *= 2;
                         score += grid[pos][i];
                         bool[pos][i] = 1;
