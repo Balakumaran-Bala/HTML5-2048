@@ -1,4 +1,4 @@
-var keyDown = false;
+let keyDown = false;
 
 var keyboardInit = function() {
     addEventListener("keydown", function(e) {

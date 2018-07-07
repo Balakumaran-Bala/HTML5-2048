@@ -13,8 +13,8 @@ var grid = [
 
 var game_over = false;
 
-var randI = Math.floor(Math.random()*4);
-var randJ = Math.floor(Math.random()*4);
+let randI = Math.floor(Math.random()*4);
+let randJ = Math.floor(Math.random()*4);
 
 grid[randI][randJ] = 2;
 randI = Math.floor(Math.random()*4);

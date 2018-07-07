@@ -1,17 +1,17 @@
-var background = new Image(512, 512);
-var border = new Image(128, 128);
+const background = new Image(512, 512);
+const border = new Image(128, 128);
 
-var two = new Image(128, 128);
-var four = new Image(128, 128);
-var eight = new Image(128, 128);
-var sixteen = new Image(128, 128);
-var thrityTwo = new Image(128, 128);
-var sixtyFour = new Image(128, 128);
-var oneTwentyEight = new Image(128, 128);
-var twoFiftySix = new Image(128, 128);
-var fiveTwelve = new Image(128, 128);
-var oneThousandTwentyEight = new Image(128, 128);
-var twoThousandFourtyEight = new Image(128, 128);
+const two = new Image(128, 128);
+const four = new Image(128, 128);
+const eight = new Image(128, 128);
+const sixteen = new Image(128, 128);
+const thrityTwo = new Image(128, 128);
+const sixtyFour = new Image(128, 128);
+const oneTwentyEight = new Image(128, 128);
+const twoFiftySix = new Image(128, 128);
+const fiveTwelve = new Image(128, 128);
+const oneThousandTwentyEight = new Image(128, 128);
+const twoThousandFourtyEight = new Image(128, 128);
 
 // Note: these paths are relative to index.html's location
 background.src = "img/background.png";
@@ -29,7 +29,7 @@ fiveTwelve.src = "img/512.png"
 oneThousandTwentyEight.src = "img/1024.png"
 twoThousandFourtyEight.src = "img/2048.png"
 
-var images = {};
+const images = {};
 // images['0'] = blank;
 images['2'] = two;
 images['4'] = four;
@@ -74,11 +74,11 @@ var render = function() {
         ctx.fillText(score.toString(), 256, 215);
     }
 
-    var x = 0;
-    var y = 290;
-    for (var i = 0; i < 4; i++) {
+    let x = 0;
+    let y = 290;
+    for (let i = 0; i < 4; i++) {
         x = 0;
-        for (var j = 0; j <4; j++) {
+        for (let j = 0; j <4; j++) {
             if (grid[i][j] != 0) {
                 ctx.drawImage(images[grid[i][j].toString()], x, y);
             }
