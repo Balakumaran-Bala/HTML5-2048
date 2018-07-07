@@ -1,3 +1,12 @@
+var animating_blocks = []; // array of objects
+// where each object looks like this:
+// {
+//   "start": {"row": i, "col": j}, // start coordinates
+//   "end": {"row": i, "col": j}, // destination coordinates
+//   "startTime": time,
+//   "action": "spawn" or "slide" or "promote"
+// }
+
 var update = function(key) {
     let bool = [
         [0, 0, 0, 0],
@@ -12,11 +21,23 @@ var update = function(key) {
         [0, 0, 0, 0],
         [0, 0, 0, 0]
     ];
+
+    a_grid = [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ]; // animation grid
+
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             oldGrid[i][j] = grid[i][j];
         }
     }
+
+    let timeNow = performance.now();
+
+    animating_blocks = [];
 
     if (key === 37) {
         for (let i = 0; i < grid.length; i++) {
@@ -30,14 +51,33 @@ var update = function(key) {
                         grid[i][pos] === grid[i][j] &&
                         bool[i][pos] !== 1) {
 
+                        a_grid[i][pos] = grid[i][pos];
                         grid[i][pos] *= 2;
                         score += grid[i][pos];
                         bool[i][pos] = 1;
                         grid[i][j] = 0;
+
+                        let animated_block = {
+                            "start": {"row": i, "col": j},
+                            "end": {"row": i, "col": pos},
+                            "startTime": timeNow,
+                            "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
                     } else {
                         let temp = grid[i][pos+1];
                         grid[i][pos+1] = grid[i][j];
                         grid[i][j] = temp;
+
+                        if (pos !== j-1) { // block will move, start != end
+                            let animated_block = {
+                                "start": {"row": i, "col": j},
+                                "end": {"row": i, "col": pos+1},
+                                "startTime": timeNow,
+                                "action": "slide"
+                            };
+                            animating_blocks.push(animated_block);
+                        }
                     }
                 }
             }
@@ -55,14 +95,33 @@ var update = function(key) {
                         grid[i][pos] === grid[i][j] &&
                         bool[i][pos] !== 1) {
 
+                        a_grid[i][pos] = grid[i][pos];
                         grid[i][pos] *= 2;
                         score += grid[i][pos];
                         bool[i][pos] = 1;
                         grid[i][j] = 0;
+
+                        let animated_block = {
+                            "start": {"row": i, "col": j},
+                            "end": {"row": i, "col": pos},
+                            "startTime": timeNow,
+                            "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
                     } else {
                         let temp = grid[i][pos-1];
                         grid[i][pos-1] = grid[i][j];
                         grid[i][j] = temp;
+
+                        if (pos !== j+1) { // block will move, start != end
+                            let animated_block = {
+                                "start": {"row": i, "col": j},
+                                "end": {"row": i, "col": pos-1},
+                                "startTime": timeNow,
+                                "action": "slide"
+                            };
+                            animating_blocks.push(animated_block);
+                        }
                     }
                 }
             }
@@ -80,14 +139,33 @@ var update = function(key) {
                         grid[pos][i] === grid[j][i] &&
                         bool[pos][i] !== 1) {
 
+                        a_grid[pos][i] = grid[pos][i];
                         grid[pos][i] *= 2;
                         score += grid[pos][i];
                         bool[pos][i] = 1;
                         grid[j][i] = 0;
+
+                        let animated_block = {
+                            "start": {"row": j, "col": i},
+                            "end": {"row": pos, "col": i},
+                            "startTime": timeNow,
+                            "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
                     } else {
                         let temp = grid[pos+1][i];
                         grid[pos+1][i] = grid[j][i];
                         grid[j][i] = temp;
+
+                        if (pos !== j-1) { // block will move, start != end
+                            let animated_block = {
+                                "start": {"row": j, "col": i},
+                                "end": {"row": pos+1, "col": i},
+                                "startTime": timeNow,
+                                "action": "slide"
+                            };
+                            animating_blocks.push(animated_block);
+                        }
                     }
                 }
             }
@@ -104,14 +182,33 @@ var update = function(key) {
                         grid[pos][i] === grid[j][i] &&
                         bool[pos][i] !== 1) {
 
+                        a_grid[pos][i] = grid[pos][i];
                         grid[pos][i] *= 2;
                         score += grid[pos][i];
                         bool[pos][i] = 1;
                         grid[j][i] = 0;
+
+                        let animated_block = {
+                            "start": {"row": j, "col": i},
+                            "end": {"row": pos, "col": i},
+                            "startTime": timeNow,
+                            "action": "slide"
+                        };
+                        animating_blocks.push(animated_block);
                     } else {
                         let temp = grid[pos-1][i];
                         grid[pos-1][i] = grid[j][i];
                         grid[j][i] = temp;
+
+                        if (pos !== j+1) { // block will move, start != end
+                            let animated_block = {
+                                "start": {"row": j, "col": i},
+                                "end": {"row": pos-1, "col": i},
+                                "startTime": timeNow,
+                                "action": "slide"
+                            };
+                            animating_blocks.push(animated_block);
+                        }
                     }
                 }
             }
@@ -161,11 +258,26 @@ var update = function(key) {
             randJ = Math.floor(Math.random()*4);
         }
 
-        let randNum = Math.floor(Math.random()*4);
-        if (randNum <= 2) {
+        if (Math.random() >= 0.5) {
             grid[randI][randJ] = 2;
         } else {
             grid[randI][randJ] = 4;
+        }
+
+        let animated_block = {
+            "start": {"row": randI, "col": randJ},
+            "end": {"row": randI, "col": randJ},
+            "startTime": timeNow,
+            "action": "spawn"
+        };
+        animating_blocks.push(animated_block);
+    }
+
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (a_grid[i][j] === 0) {
+                a_grid[i][j] = grid[i][j];
+            }
         }
     }
 }

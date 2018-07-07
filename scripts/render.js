@@ -1,3 +1,10 @@
+var a_grid = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+]; // animation grid
+
 const background = new Image(512, 512);
 const border = new Image(128, 128);
 
@@ -57,7 +64,16 @@ var restart_click = function(event) {
     //console.log("X: " + event.clientX + " Y: " + event.clientY);
 }
 
-var render = function() {
+// Step 1: Check for arrival at destination, remove from list accordingly,
+//         and if necessary, add new block to list with same start and
+//         destination (indicating that the block is grow/shrinking).
+
+// CANCEL: Check for blocks at destinations, set them to half value.
+
+// Step 3: Draw. If a sliding block is near its destination, fade it.
+//         How do you know the progress of a grow/shrinking block?
+
+var render = function(timeNow) {
     ctx.fillStyle = "#f6f0ff"
     ctx.font = "bold 150px Source Sans Pro";
     ctx.textAlign = "center";
@@ -79,8 +95,8 @@ var render = function() {
     for (let i = 0; i < 4; i++) {
         x = 0;
         for (let j = 0; j <4; j++) {
-            if (grid[i][j] != 0) {
-                ctx.drawImage(images[grid[i][j].toString()], x, y);
+            if (a_grid[i][j] != 0) {
+                ctx.drawImage(images[a_grid[i][j].toString()], x, y);
             }
             ctx.drawImage(border, x, y);
             x += 128;
@@ -99,5 +115,5 @@ var render = function() {
         ctx.fillText("RESTART", 256, 950);
         addEventListener("click", restart_click, false);
     }
-    //requestAnimationFrame(render);
+    requestAnimationFrame(render);
 };
