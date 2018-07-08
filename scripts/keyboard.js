@@ -1,18 +1,7 @@
-let keyDown = false;
-
 var keyboardInit = function() {
     addEventListener("keydown", function(e) {
-         // only call update once
-        if (!keyDown && [37, 38, 39, 40].includes(e.keyCode)) {
-            keyDown = true;
+        if ([37, 38, 39, 40].includes(e.keyCode)) {
             update(e.keyCode);
         }
     }, false);
-
-    addEventListener("keyup", function(e) {
-        if ([37, 38, 39, 40].includes(e.keyCode)) {
-            keyDown = false;
-        }
-    }, false)
-
 }
