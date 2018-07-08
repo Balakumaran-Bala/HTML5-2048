@@ -193,8 +193,14 @@ var render = function(timeNow) {
             if (timeNow - startTime > animationTime) {
                 animating_blocks[i].action = "none";
             } else {
-                ctx.globalAlpha = ((timeNow - startTime) / animationTime);
-                ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
+                let width = ((timeNow - startTime) / animationTime) * 128;
+                let padX = (128 / 2) - (width / 2);
+                let padY = (128 / 2) - (width / 2);
+                ctx.drawImage(images[grid[endRow][endCol]],
+                              128*endCol + padX,
+                              128*endRow + 290 + padY,
+                              width,
+                              width);
                 ctx.globalAlpha = 1.0;
             }
         } else if (animating_blocks[i].action === "promote") {
