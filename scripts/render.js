@@ -127,6 +127,8 @@ var render = function(timeNow) {
     }
 
     for (let i = 0; i < animating_blocks.length; i++) {
+        ctx.globalAlpha = 1;
+
         let startTime = animating_blocks[i].startTime;
         let endRow = animating_blocks[i].end.row;
         let endCol = animating_blocks[i].end.col;
@@ -139,6 +141,19 @@ var render = function(timeNow) {
             let d_row = endRow - startRow;
             let d_col = endCol - startCol;
 
+            let promotee = null;
+
+            for (let j = 0; j < animating_blocks.length; j++) {
+                if (
+                    animating_blocks[j].action === "promote" &&
+                    animating_blocks[j].start.row === animating_blocks[i].end.row &&
+                    animating_blocks[j].start.col === animating_blocks[i].end.col
+                ) {
+                    promotee = animating_blocks[j];
+                    break;
+                }
+            }
+
             // distance travelled = elapsedTime * animationSpeed
             // animationSpeed = maxDistance / animationTime = (128 * 3) / animationTime
             // timeToDestination = distanceTravelling / animationSpeed
@@ -149,8 +164,12 @@ var render = function(timeNow) {
                 timeToDestination = Math.abs(d_col * animationTime / 3);
             }
 
+            if (promotee && (timeNow - startTime) > (timeToDestination - (animationTime / 3))) {
+                promotee.startTime = timeNow;
+                ctx.globalAlpha = 1 - ((timeNow - startTime - timeToDestination + (animationTime / 3)) / (animationTime / 3));
+            }
+
             if (timeNow - startTime > timeToDestination) {
-                ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
                 animating_blocks[i].action = "none";
             } else {
                 let x = 128 * startCol;
@@ -164,15 +183,28 @@ var render = function(timeNow) {
                 } else if (d_col < 0) {
                     x -= (timeNow - startTime) * (128 * 3) / animationTime;
                 }
-                ctx.drawImage(images[grid[endRow][endCol]], x, y + 290); // bugged, could be using doubled value
+                if (promotee) {
+                    ctx.drawImage(images[grid[endRow][endCol] / 2], x, y + 290);
+                } else {
+                    ctx.drawImage(images[grid[endRow][endCol]], x, y + 290);
+                }
             }
         } else if (animating_blocks[i].action === "spawn") {
-            if (timeNow - startTime > 200) {
+            if (timeNow - startTime > animationTime) {
                 animating_blocks[i].action = "none";
             } else {
-                ctx.globalAlpha = ((timeNow - startTime) / 250);
+                ctx.globalAlpha = ((timeNow - startTime) / animationTime);
                 ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
                 ctx.globalAlpha = 1.0;
+            }
+        } else if (animating_blocks[i].action === "promote") {
+            if (startTime === null) {
+                ctx.drawImage(images[grid[endRow][endCol] / 2], 128*endCol, 128*endRow + 290);
+            } else if (timeNow - startTime <= 175) {
+                ctx.globalAlpha = 1;// ((timeNow - startTime) / 175);
+                ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
+            } else {
+                animating_blocks[i].action = "none";
             }
         }
     }
