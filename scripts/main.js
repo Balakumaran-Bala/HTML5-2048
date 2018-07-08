@@ -25,7 +25,3 @@ background.onload = function() {
     render(); // why can't this be assigned to onload alone?
     keyboardInit(); // start the game
 };
-
-/* var main = function() {
-    requestAnimationFrame(main);
-} */

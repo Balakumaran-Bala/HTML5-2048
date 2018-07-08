@@ -57,7 +57,16 @@ var restart_click = function(event) {
     //console.log("X: " + event.clientX + " Y: " + event.clientY);
 }
 
-var render = function() {
+// Step 1: Check for arrival at destination, remove from list accordingly,
+//         and if necessary, add new block to list with same start and
+//         destination (indicating that the block is grow/shrinking).
+
+// CANCEL: Check for blocks at destinations, set them to half value.
+
+// Step 3: Draw. If a sliding block is near its destination, fade it.
+//         How do you know the progress of a grow/shrinking block?
+
+var render = function(timeNow) {
     ctx.fillStyle = "#f6f0ff"
     ctx.font = "bold 150px Source Sans Pro";
     ctx.textAlign = "center";
@@ -78,14 +87,132 @@ var render = function() {
     let y = 290;
     for (let i = 0; i < 4; i++) {
         x = 0;
-        for (let j = 0; j <4; j++) {
-            if (grid[i][j] != 0) {
+        for (let j = 0; j < 4; j++) {
+            let action = null;
+            let animating_block;
+            for (let k = 0; k < animating_blocks.length; k++) {
+                if (
+                    animating_blocks[k].end.row === i &&
+                    animating_blocks[k].end.col === j 
+                ) {
+                    action = animating_blocks[k].action;
+                    animating_block = animating_blocks[k];
+                    break;
+                }
+            }
+
+            if (action === "slide") { // This block is sliding, don't show it at its destination yet
+            /*
+                let d_row = i - animating_block.start.row;
+                let d_col = j - animating_block.start.col;
+                if (timeNow - animating_block.startTime > 48) {
+                    ctx.drawImage(images[grid[i][j]], 128*i, 128*j + 290);
+                } else { 
+                    // (distance) * (elapsedTime / animationTime)
+                    let x = (128 * d_col) * ((timeNow - animating_block.startTime) / 48);
+                    let y = (128 * d_row) * ((timeNow - animating_block.startTime) / 48);
+                    ctx.drawImage(images[grid[i][j]], x, y + 290); // bugged, could be using doubled value
+                }*/
+            } else if (action === "promote") {
+
+            } else if (action === "spawn") {
+
+            } else if (grid[i][j] != 0) {
                 ctx.drawImage(images[grid[i][j].toString()], x, y);
             }
             ctx.drawImage(border, x, y);
             x += 128;
         }
         y += 128;
+    }
+
+    for (let i = 0; i < animating_blocks.length; i++) {
+        ctx.globalAlpha = 1;
+
+        let startTime = animating_blocks[i].startTime;
+        let endRow = animating_blocks[i].end.row;
+        let endCol = animating_blocks[i].end.col;
+        let startRow = animating_blocks[i].start.row
+        let startCol = animating_blocks[i].start.col
+
+        let animationTime = 100;
+
+        if (animating_blocks[i].action === "slide") {
+            let d_row = endRow - startRow;
+            let d_col = endCol - startCol;
+
+            let promotee = null;
+
+            for (let j = 0; j < animating_blocks.length; j++) {
+                if (
+                    animating_blocks[j].action === "promote" &&
+                    animating_blocks[j].start.row === animating_blocks[i].end.row &&
+                    animating_blocks[j].start.col === animating_blocks[i].end.col
+                ) {
+                    promotee = animating_blocks[j];
+                    break;
+                }
+            }
+
+            // distance travelled = elapsedTime * animationSpeed
+            // animationSpeed = maxDistance / animationTime = (128 * 3) / animationTime
+            // timeToDestination = distanceTravelling / animationSpeed
+
+            if (d_row) {
+                timeToDestination = Math.abs(d_row * animationTime / 3);
+            } else {
+                timeToDestination = Math.abs(d_col * animationTime / 3);
+            }
+
+            if (promotee && (timeNow - startTime) > (timeToDestination - (animationTime / 3))) {
+                promotee.startTime = timeNow;
+                ctx.globalAlpha = 1 - ((timeNow - startTime - timeToDestination + (animationTime / 3)) / (animationTime / 3));
+            }
+
+            if (timeNow - startTime > timeToDestination) {
+                animating_blocks[i].action = "none";
+            } else {
+                let x = 128 * startCol;
+                let y = 128 * startRow;
+                if (d_row > 0) {
+                    y += (timeNow - startTime) * (128 * 3) / animationTime;
+                } else if (d_col > 0) {
+                    x += (timeNow - startTime) * (128 * 3) / animationTime;
+                } else if (d_row < 0) {
+                    y -= (timeNow - startTime) * (128 * 3) / animationTime;
+                } else if (d_col < 0) {
+                    x -= (timeNow - startTime) * (128 * 3) / animationTime;
+                }
+                if (promotee) {
+                    ctx.drawImage(images[grid[endRow][endCol] / 2], x, y + 290);
+                } else {
+                    ctx.drawImage(images[grid[endRow][endCol]], x, y + 290);
+                }
+            }
+        } else if (animating_blocks[i].action === "spawn") {
+            if (timeNow - startTime > animationTime) {
+                animating_blocks[i].action = "none";
+            } else {
+                let width = ((timeNow - startTime) / animationTime) * 128;
+                let padX = (128 / 2) - (width / 2);
+                let padY = (128 / 2) - (width / 2);
+                ctx.drawImage(images[grid[endRow][endCol]],
+                              128*endCol + padX,
+                              128*endRow + 290 + padY,
+                              width,
+                              width);
+                ctx.globalAlpha = 1.0;
+            }
+        } else if (animating_blocks[i].action === "promote") {
+            if (startTime === null) {
+                ctx.drawImage(images[grid[endRow][endCol] / 2], 128*endCol, 128*endRow + 290);
+            } else if (timeNow - startTime <= 175) {
+                ctx.globalAlpha = 1;// ((timeNow - startTime) / 175);
+                ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
+            } else {
+                animating_blocks[i].action = "none";
+            }
+        }
     }
 
     if (game_over) {
@@ -99,5 +226,5 @@ var render = function() {
         ctx.fillText("RESTART", 256, 950);
         addEventListener("click", restart_click, false);
     }
-    //requestAnimationFrame(render);
+    requestAnimationFrame(render);
 };

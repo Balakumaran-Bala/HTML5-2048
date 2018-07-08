@@ -6,7 +6,6 @@ var keyboardInit = function() {
         if (!keyDown && [37, 38, 39, 40].includes(e.keyCode)) {
             keyDown = true;
             update(e.keyCode);
-            render();
         }
     }, false);
 
