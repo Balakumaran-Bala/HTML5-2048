@@ -23,5 +23,5 @@ grid[randI][randJ] = 2;
 
 background.onload = function() {
     render(); // why can't this be assigned to onload alone?
-    keyboardInit(); // start the game
+    inputInit(); // start the game
 };

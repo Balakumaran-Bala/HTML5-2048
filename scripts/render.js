@@ -46,17 +46,6 @@ images['2048'] = twoThousandFourtyEight;
 // Everything drawn is scaled by .6 to fit inside the
 // 306 by 665 canvas.
 
-var restart_click = function(event) {
-    relativeX = event.clientX - canvas.offsetLeft;
-    relativeY = event.clientY - canvas.getBoundingClientRect().top;
-
-    if (0 < relativeX && relativeX < canvas.width &&
-        450 < relativeY && relativeY < canvas.height) {
-        document.location.reload();
-    }
-    //console.log("X: " + event.clientX + " Y: " + event.clientY);
-}
-
 // Step 1: Check for arrival at destination, remove from list accordingly,
 //         and if necessary, add new block to list with same start and
 //         destination (indicating that the block is grow/shrinking).
@@ -224,7 +213,6 @@ var render = function(timeNow) {
         ctx.fillText("measly points", 256, 700);
         ctx.font = "bold 125px Source Sans Pro";
         ctx.fillText("RESTART", 256, 950);
-        addEventListener("click", restart_click, false);
     }
     requestAnimationFrame(render);
 };
