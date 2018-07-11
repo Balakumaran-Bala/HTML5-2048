@@ -212,6 +212,13 @@ var render = function(timeNow) {
         ctx.font = "75px Source Sans Pro";
         ctx.fillText("measly points", 256, 700);
         ctx.font = "bold 125px Source Sans Pro";
+        if (restartMouseOver) {
+            ctx.strokeStyle = "#9423ea";
+            ctx.lineWidth = 10.0;
+            ctx.strokeText("RESTART", 256, 950);
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1.0;
+        }
         ctx.fillText("RESTART", 256, 950);
     }
     requestAnimationFrame(render);

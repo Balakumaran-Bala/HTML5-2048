@@ -12,6 +12,7 @@ var grid = [
 ];
 
 var game_over = false;
+var restartMouseOver = false;
 
 let randI = Math.floor(Math.random()*4);
 let randJ = Math.floor(Math.random()*4);

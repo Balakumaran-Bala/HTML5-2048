@@ -6,13 +6,27 @@ var inputInit = function() {
         }
     }, false);
 
+    addEventListener("mousemove", function(event) {
+        let relativeX = event.clientX - canvas.offsetLeft;
+        let relativeY = event.clientY - canvas.getBoundingClientRect().top;
+
+        if (game_over) {
+            if (0 < relativeX && relativeX < canvas.width &&
+                500 < relativeY && relativeY < 590) {
+                restartMouseOver = true;
+            } else {
+                restartMouseOver = false;
+            }
+        }
+    }, false);
+
     addEventListener("click", function(event) {
         let relativeX = event.clientX - canvas.offsetLeft;
         let relativeY = event.clientY - canvas.getBoundingClientRect().top;
     
         if (game_over) {
             if (0 < relativeX && relativeX < canvas.width &&
-                450 < relativeY && relativeY < canvas.height) {
+                500 < relativeY && relativeY < 590) {
                 score = 0;
                 grid = [
                     [0, 0, 0, 0],
