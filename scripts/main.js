@@ -12,6 +12,7 @@ var grid = [
 ];
 
 var game_over = false;
+var restartMouseOver = false;
 
 let randI = Math.floor(Math.random()*4);
 let randJ = Math.floor(Math.random()*4);
@@ -23,5 +24,5 @@ grid[randI][randJ] = 2;
 
 background.onload = function() {
     render(); // why can't this be assigned to onload alone?
-    keyboardInit(); // start the game
+    inputInit(); // start the game
 };
