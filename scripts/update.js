@@ -279,7 +279,7 @@ var update = function(key) {
             randJ = Math.floor(Math.random()*4);
         }
 
-        if (Math.random() >= 0.5) {
+        if (Math.random() >= 0.3) {
             grid[randI][randJ] = 2;
         } else {
             grid[randI][randJ] = 4;
