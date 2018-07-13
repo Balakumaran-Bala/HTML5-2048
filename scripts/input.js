@@ -1,8 +1,11 @@
+fingerX;
+fingerY;
+
 var inputInit = function() {
-    addEventListener("keydown", function(e) {
-        if ([37, 38, 39, 40].includes(e.keyCode)) {
-            e.preventDefault();
-            update(e.keyCode);
+    addEventListener("keydown", function(event) {
+        if ([37, 38, 39, 40].includes(event.keyCode)) {
+            event.preventDefault();
+            update(event.keyCode);
         }
     }, false);
 
@@ -23,7 +26,7 @@ var inputInit = function() {
     addEventListener("click", function(event) {
         let relativeX = event.clientX - canvas.offsetLeft;
         let relativeY = event.clientY - canvas.getBoundingClientRect().top;
-    
+
         if (game_over) {
             if (0 < relativeX && relativeX < canvas.width &&
                 500 < relativeY && relativeY < 590) {
@@ -45,5 +48,41 @@ var inputInit = function() {
                 grid[randI][randJ] = 2;
             }
         }
+    }, false);
+
+    addEventListener("touchstart", (event) => {
+      if (event.touches) {
+        fingerX = event.touches[0].pageX;
+        fingerY = event.touches[0].pageY;
+        event.preventDefault();
+      }
+    }, false);
+
+    addEventListener("touchend", (event) => {
+      if (event.touches) {
+        event.preventDefault();
+        const X = event.changedTouches[event.changedTouches.length-1].pageX - fingerX;
+        const Y = event.changedTouches[event.changedTouches.length-1].pageY - fingerY;
+        const absX = Math.abs(X);
+        const absY = Math.abs(Y);
+        if (absX > absY) {
+          if (absX - canvas.width/4 + 5 > 0) {
+            if (X > 0) {
+              update(39);
+            } else {
+              update(37);
+            }
+          }
+        }
+        else {
+          if (absY - canvas.height/4 + 5 > 0) {
+            if (Y > 0) {
+              update(38);
+            } else {
+              update(40);
+            }
+          }
+        }
+      }
     }, false);
 }
