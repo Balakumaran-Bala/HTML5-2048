@@ -51,7 +51,7 @@ var inputInit = function() {
         const absX = Math.abs(X);
         const absY = Math.abs(Y);
         if (absX > absY) {
-          if (absX - canvas.width/5 + 7 > 0) {
+          if (absX - canvas.width/6 + 7 > 0) {
             if (X > 0) {
               update(39);
             } else {
@@ -60,7 +60,7 @@ var inputInit = function() {
           }
         }
         else {
-          if (absY - canvas.height/5 + 7 > 0) {
+          if (absY - canvas.width/6 + 7 > 0) {
             if (Y > 0) {
               update(40);
             } else {
