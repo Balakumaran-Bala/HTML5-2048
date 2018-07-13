@@ -82,7 +82,7 @@ var render = function(timeNow) {
             for (let k = 0; k < animating_blocks.length; k++) {
                 if (
                     animating_blocks[k].end.row === i &&
-                    animating_blocks[k].end.col === j 
+                    animating_blocks[k].end.col === j
                 ) {
                     action = animating_blocks[k].action;
                     animating_block = animating_blocks[k];
@@ -96,7 +96,7 @@ var render = function(timeNow) {
                 let d_col = j - animating_block.start.col;
                 if (timeNow - animating_block.startTime > 48) {
                     ctx.drawImage(images[grid[i][j]], 128*i, 128*j + 290);
-                } else { 
+                } else {
                     // (distance) * (elapsedTime / animationTime)
                     let x = (128 * d_col) * ((timeNow - animating_block.startTime) / 48);
                     let y = (128 * d_row) * ((timeNow - animating_block.startTime) / 48);
@@ -196,7 +196,7 @@ var render = function(timeNow) {
             if (startTime === null) {
                 ctx.drawImage(images[grid[endRow][endCol] / 2], 128*endCol, 128*endRow + 290);
             } else if (timeNow - startTime <= 175) {
-                ctx.globalAlpha = 1;// ((timeNow - startTime) / 175);
+                ctx.globalAlpha = 1; // ((timeNow - startTime) / 175);
                 ctx.drawImage(images[grid[endRow][endCol]], 128*endCol, 128*endRow + 290);
             } else {
                 animating_blocks[i].action = "none";
