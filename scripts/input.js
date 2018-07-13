@@ -1,5 +1,5 @@
-fingerX;
-fingerY;
+let fingerX = 0;
+let fingerY = 0;
 
 var inputInit = function() {
     addEventListener("keydown", function(event) {
@@ -56,7 +56,7 @@ var inputInit = function() {
         fingerY = event.touches[0].pageY;
         event.preventDefault();
       }
-    }, false);
+    },  {passive: false});
 
     addEventListener("touchend", (event) => {
       if (event.touches) {
@@ -66,7 +66,7 @@ var inputInit = function() {
         const absX = Math.abs(X);
         const absY = Math.abs(Y);
         if (absX > absY) {
-          if (absX - canvas.width/4 + 5 > 0) {
+          if (absX - canvas.width/5 + 7 > 0) {
             if (X > 0) {
               update(39);
             } else {
@@ -75,14 +75,14 @@ var inputInit = function() {
           }
         }
         else {
-          if (absY - canvas.height/4 + 5 > 0) {
+          if (absY - canvas.height/5 + 7 > 0) {
             if (Y > 0) {
-              update(38);
-            } else {
               update(40);
+            } else {
+              update(38);
             }
           }
         }
       }
-    }, false);
+    }, {passive: false});
 }
