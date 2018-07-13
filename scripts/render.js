@@ -69,7 +69,11 @@ var render = function(timeNow) {
     //153 - (textWidth / 2)
 
     if (!game_over){
-        ctx.fillText(score.toString(), 256, 215);
+        if (window.screen.height < 665 && window.screen.width < 425) {
+            ctx.fillText(score.toString(), 256, 275);
+        } else {
+            ctx.fillText(score.toString(), 256, 215);
+        }
     }
 
     let x = 0;
@@ -206,11 +210,17 @@ var render = function(timeNow) {
 
     if (game_over) {
         ctx.filter = "none";
-        ctx.fillText("GAME", 256, 215);
-        ctx.fillText("OVER", 256, 365);
+        if (window.screen.height < 665 && window.screen.width < 425) {
+            ctx.fillText("GAME", 256, 275);
+            ctx.fillText("OVER", 256, 425);
+        } else {
+            ctx.fillText("GAME", 256, 215);
+            ctx.fillText("OVER", 256, 365);
+        }
         ctx.fillText(score.toString(), 256, 600);
         ctx.font = "75px Source Sans Pro";
         ctx.fillText("measly points", 256, 700);
+
         ctx.font = "bold 125px Source Sans Pro";
         if (restartMouseOver) {
             ctx.strokeStyle = "#9423ea";
@@ -219,7 +229,11 @@ var render = function(timeNow) {
             ctx.strokeStyle = "#000000";
             ctx.lineWidth = 1.0;
         }
-        ctx.fillText("RESTART", 256, 950);
+        if (window.screen.height < 665 && window.screen.width < 425) {
+            ctx.fillText("RESTART", 256, 860);
+        } else {
+            ctx.fillText("RESTART", 256, 950);
+        }
     }
     requestAnimationFrame(render);
 };
