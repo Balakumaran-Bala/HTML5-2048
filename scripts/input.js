@@ -75,8 +75,9 @@ var inputInit = function() {
     }, {passive: false});
 
     window.addEventListener("resize", function(event) {
-        if (window.screen.height < 665 && window.screen.width < 425) {
-            canvas.style.top = "-" + Math.min(36, (665 - window.screen.height)) + "px";
+        if ((window.screen.width / window.screen.height) > 0.47 && window.screen.width <= 425) {
+            let canvasHeight = canvas.getBoundingClientRect().height; // window.screen.width*2.17
+            canvas.style.top = "-" + Math.min(canvasHeight * .15, canvasHeight - window.screen.height) + "px";
         } else {
             canvas.style.top = null;
         }

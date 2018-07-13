@@ -69,7 +69,7 @@ var render = function(timeNow) {
     //153 - (textWidth / 2)
 
     if (!game_over){
-        if (window.screen.height < 665 && window.screen.width < 425) {
+        if ((window.screen.width / window.screen.height) > 0.53 && window.screen.width <= 425) {
             ctx.fillText(score.toString(), 256, 275);
         } else {
             ctx.fillText(score.toString(), 256, 215);
@@ -210,7 +210,7 @@ var render = function(timeNow) {
 
     if (game_over) {
         ctx.filter = "none";
-        if (window.screen.height < 665 && window.screen.width < 425) {
+        if ((window.screen.width / window.screen.height) > 0.53 && window.screen.width <= 425) {
             ctx.fillText("GAME", 256, 275);
             ctx.fillText("OVER", 256, 425);
         } else {
@@ -229,7 +229,7 @@ var render = function(timeNow) {
             ctx.strokeStyle = "#000000";
             ctx.lineWidth = 1.0;
         }
-        if (window.screen.height < 665 && window.screen.width < 425) {
+        if ((window.screen.width / window.screen.height) > 0.53 && window.screen.width <= 425) {
             ctx.fillText("RESTART", 256, 860);
         } else {
             ctx.fillText("RESTART", 256, 950);

@@ -61,6 +61,7 @@ html {
     }
 
     #game {
+        top: 0px;
         width: 95vw;
         height: 206vw;
     }
