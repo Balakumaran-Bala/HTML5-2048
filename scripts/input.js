@@ -50,26 +50,27 @@ var inputInit = function() {
         const Y = event.changedTouches[event.changedTouches.length-1].pageY - fingerY;
         const absX = Math.abs(X);
         const absY = Math.abs(Y);
-        if (absX > absY) {
-          if (absX - canvas.width/6 + 7 > 0) {
-            if (X > 0) {
-              update(39);
-            } else {
-              update(37);
-            }
-          }
-        }
-        else {
-          if (absY - canvas.width/6 + 7 > 0) {
-            if (Y > 0) {
-              update(40);
-            } else {
-              update(38);
-            }
-          }
-        }
         if (game_over) {
             restartGame();
+        } else {
+            if (absX > absY) {
+                if (absX - canvas.width/6 + 7 > 0) {
+                    if (X > 0) {
+                    update(39);
+                    } else {
+                    update(37);
+                    }
+                }
+            }
+            else {
+                if (absY - canvas.width/6 + 7 > 0) {
+                    if (Y > 0) {
+                    update(40);
+                    } else {
+                    update(38);
+                    }
+                }
+            }
         }
       }
     }, {passive: false});
