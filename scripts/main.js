@@ -1,7 +1,7 @@
 var canvas = document.getElementById("game");
 
 if (window.screen.height < 665 && window.screen.width < 425) {
-    canvas.style.marginTop = "-" + Math.min(36, (665 - window.screen.height)) + "px";
+    canvas.style.top = "-" + Math.min(36, (665 - window.screen.height)) + "px";
 }
 
 var ctx = canvas.getContext("2d");
