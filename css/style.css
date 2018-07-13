@@ -38,6 +38,10 @@ html {
 
 @media only screen and (max-width: 425px) {
     /* For mobile phones: */
+    div > a {
+        display: none;
+    }
+
     .title {
         display: none;
     }
@@ -46,8 +50,10 @@ html {
         display: none;
     }
 
-    div > a {
-        display: none;
+    .game-container {
+        width: 95vw;
+        height: 97vh;
+        overflow: hidden;
     }
 
     #iphone {
@@ -55,12 +61,8 @@ html {
     }
 
     #game {
-        /*
-        width: 100vw;
-        height: 217vw;
-        */
         top: 0px;
-        width: 90vw;
-        height: 196vw;
+        width: 95vw;
+        height: 206vw;
     }
 }
