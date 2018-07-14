@@ -272,6 +272,7 @@ var update = function(key) {
     }
 
     if (change != 0) {
+        playSound();
         let randI = Math.floor(Math.random()*4);
         let randJ = Math.floor(Math.random()*4);
         while (grid[randI][randJ] != 0) {
