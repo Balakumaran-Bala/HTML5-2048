@@ -238,9 +238,10 @@ var render = function(timeNow) {
         if (!scoreSent) {
             var data = {};
             data.score = score;
+            data.name = playerName;
             var json = JSON.stringify(data);
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/score", true);
+            xhr.open("POST", "/", true);
             xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
             xhr.onload = function() {
                 var users = JSON.parse(xhr.responseText);

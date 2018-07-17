@@ -13,6 +13,7 @@ var grid;
 var game_over;
 var restartMouseOver;
 var scoreSent;
+var playerName;
 
 var restartGame = function() {
     score = 0;
@@ -24,6 +25,7 @@ var restartGame = function() {
     ];
     game_over = false;
     scoreSent = false;
+    playerName = "";
 
     let randI = Math.floor(Math.random()*4);
     let randJ = Math.floor(Math.random()*4);

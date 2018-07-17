@@ -21,9 +21,14 @@
     <script src="scripts/update.js"></script>
     <script src="scripts/main.js"></script>
     <body>
-        <form action="/" method="post">
-            Please input a name: <input type="text" name="name"><br>
+        <form onSubmit="changeName(); return false">
+            Please input a name: <input type="text" name="name" id="player" value=""><br>
             <input type="submit" value="Submit">
         </form>
+        <script>
+            function changeName() {
+                playerName = document.getElementById("player").value;
+            }
+        </script>
     </body>
 </html>

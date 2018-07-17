@@ -6,6 +6,10 @@ var animating_blocks = []; // array of objects
 //   "startTime": time,
 //   "action": "spawn" or "slide" or "promote"
 // }
+// var changeName = function() {
+//     playerName = document.getElementById("player").value;
+//     console.log(playerName);
+// }
 
 var update = function(key) {
     let bool = [

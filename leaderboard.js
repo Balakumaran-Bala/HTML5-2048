@@ -21,15 +21,12 @@ con.connect(function(err) {
 	console.log("Connected to MySQL!");
 });
 
-app.post('/score', function(req, res) {
-	console.log(req.body);
-})
-
 app.post('/', function(req, res) {
 	var name = req.body.name;
-	var sql = "INSERT INTO players (name, score) VALUES (?, 10)";
+	var score = req.body.score;
+	var sql = "INSERT INTO players (name, score) VALUES (?, ?)";
 
-	con.query(sql, name, function(err, result) {
+	con.query(sql, [name, score], function(err, result) {
 		if (err) throw err
 		console.log("Succesfully inserted!");
 	});
