@@ -234,6 +234,26 @@ var render = function(timeNow) {
         } else {
             ctx.fillText("RESTART", 256, 950);
         }
+
+        if (!scoreSent) {
+            var data = {};
+            data.score = score;
+            var json = JSON.stringify(data);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/score", true);
+            xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhr.onload = function() {
+                var users = JSON.parse(xhr.responseText);
+                if (xhr.readyState == 4 && xhr.status == "201") {
+                    console.table(users);
+                } else {
+                    console.error(users);
+                }
+            }
+            xhr.send(json);
+            scoreSent = true;
+        }
+
     }
     requestAnimationFrame(render);
 };
