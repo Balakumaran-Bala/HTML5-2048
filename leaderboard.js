@@ -1,30 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
+var mysql = require('mysql');
 
 var app = express();
 
-var path = require('path');
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extendeed: true}));
 app.use(express.static(path.join(__dirname, '/public')))
-
-app.listen(8080, function() {
-	console.log("Server listening on 8080");
-});
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extendeed: true}));
-
-// app.post('/leaders', function(req, res) {
-// 	console.log(req.body.data);
-// 	//res.send();
-// });
-
-// app.listen(8080, function() {
-// 	console.log('Server listening at 8080');
-// });
-
-//http://127.0.0.1:8080/
-/*
-var mysql = require('mysql');
 
 var con = mysql.createConnection({
 	host: 'localhost',
@@ -35,11 +18,21 @@ var con = mysql.createConnection({
 
 con.connect(function(err) {
 	if (err) throw err
-	console.log("Connected!");
-	var sql = CREATE TABLE customers
-	con.query("CREATE DATABASE mydb", function(err, result) {
+	console.log("Connected to MySQL!");
+});
+
+app.post('/', function(req, res) {
+	console.log(req.body.name);
+	var name = req.body.name;
+	
+	var sql = "INSERT INTO players (name, score) VALUES (?, 10)";
+
+	con.query(sql, name, function(err, result) {
 		if (err) throw err
-		console.log("Database created!");
+		console.log("Succesfully inserted!");
 	});
 });
-*/
+
+app.listen(8080, function() {
+	console.log("Server listening on 8080");
+});
