@@ -21,6 +21,16 @@ con.connect(function(err) {
 	console.log("Connected to MySQL!");
 });
 
+app.get('/score', function(req, res) {
+	sql = "SELECT MAX(score) AS HighestScore FROM players";
+	con.query(sql, function(err, result) {
+		if (err) throw err
+		console.log(result[0].HighestScore);
+		var greatest = result[0].HighestScore;
+		res.send(JSON.stringify(greatest));
+	});
+});
+
 app.post('/', function(req, res) {
 	var name = req.body.name;
 	var score = req.body.score;

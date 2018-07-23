@@ -253,6 +253,17 @@ var render = function(timeNow) {
             }
             xhr.send(json);
             scoreSent = true;
+
+            var xhr2 = new XMLHttpRequest();
+            xhr2.onreadystatechange = function() {
+                if (xhr2.readyState == 4 && xhr2.status > 100) {
+                    var highest = xhr2.responseText;
+                    console.log(highest);
+                }
+            };
+            xhr2.open("GET", "/score", true);
+            xhr2.send(null);
+            console.log("hmm");
         }
 
     }
