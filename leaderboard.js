@@ -25,7 +25,6 @@ app.get('/score', function(req, res) {
 	sql = "SELECT MAX(score) AS HighestScore FROM players";
 	con.query(sql, function(err, result) {
 		if (err) throw err
-		console.log(result[0].HighestScore);
 		var greatest = result[0].HighestScore;
 		res.send(JSON.stringify(greatest));
 	});

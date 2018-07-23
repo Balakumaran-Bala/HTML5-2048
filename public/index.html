@@ -15,6 +15,7 @@
         <a href="https://github.com/Balakumaran-Bala/HTML5-2048" target="_blank">GitHub</a>
     </div>
 
+    <p id="leaderboard">coming soon!</p>
     <script src="scripts/sound.js"></script>
     <script src="scripts/render.js"></script>
     <script src="scripts/input.js"></script>
@@ -22,12 +23,20 @@
     <script src="scripts/main.js"></script>
     <body>
         <form onSubmit="changeName(); return false">
-            Please input a name: <input type="text" name="name" id="player" value=""><br>
+            <select id="player">
+                <option value="Max">Max</option>
+                <option value="Keane">Keane</option>
+                <option value="Kunal">Kunal</option>
+                <option value="Bala">Bala</option>
+                <option value="Usman">Bala</option>
+                <option value="Andy">Bala</option>
+            </select>
             <input type="submit" value="Submit">
         </form>
         <script>
             function changeName() {
-                playerName = document.getElementById("player").value;
+                var e = document.getElementById("player");
+                playerName = e.options[e.selectedIndex].text;
             }
         </script>
     </body>
