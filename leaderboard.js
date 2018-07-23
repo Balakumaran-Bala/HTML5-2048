@@ -22,11 +22,14 @@ con.connect(function(err) {
 });
 
 app.get('/score', function(req, res) {
-	sql = "SELECT MAX(score) AS HighestScore FROM players";
+	var data = {};
+	sql = "SELECT name, score FROM players WHERE score = (SELECT MAX(score) FROM players)"
 	con.query(sql, function(err, result) {
 		if (err) throw err
 		var greatest = result[0].HighestScore;
-		res.send(JSON.stringify(greatest));
+		data.highest_score = result[0].score;
+		data.highest_name = result[0].name
+		res.send(JSON.stringify(data));
 	});
 });
 

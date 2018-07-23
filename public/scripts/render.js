@@ -256,15 +256,15 @@ var render = function(timeNow) {
         }
 
         var xhr2 = new XMLHttpRequest();
-            xhr2.onreadystatechange = function() {
-                if (xhr2.readyState == 4 && xhr2.status > 100) {
-                    var highest = xhr2.responseText;
-                    document.getElementById("leaderboard").innerHTML = highest;
-                }
-            };
+        xhr2.onreadystatechange = function() {
+            if (xhr2.readyState == 4 && xhr2.status > 100) {
+                var highest = JSON.parse(xhr2.responseText);
+                document.getElementById("leaderboard").innerHTML = highest.highest_name + ": " + highest.highest_score;
+            }
+        };
         xhr2.open("GET", "/score", true);
         xhr2.send(null);
-        
+
     }
     requestAnimationFrame(render);
 };
